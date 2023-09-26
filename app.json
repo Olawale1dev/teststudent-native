@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "teststudent-native",
+    "slug": "teststudent-native",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "teststudent-native"
+}
