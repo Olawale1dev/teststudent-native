@@ -5,7 +5,33 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "privacy": "public",
+    "sdkVersion": "49.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "orientation": "portrait",
+    "icon": "./splash1.png",
+    "splash": {
+      "image": "./splash2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "ios": {
+      "bundleIdentifier": "com.teststudent.1",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.teststudent.1",
+      "versionCode": 1
+    },
+    "description": "PRACTICE BEFORE EXAM"
   },
   "name": "teststudent-native"
 }
