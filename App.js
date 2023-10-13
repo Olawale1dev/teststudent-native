@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import {View,BackHandler,Platform, ActivityIndicator,Button,Text,ScrollView,RefreshControl, FlatList, ScrollViewBase} from 'react-native';
+import {View,BackHandler,Platform, ActivityIndicator,Button,Text,Platform,ScrollView,RefreshControl, FlatList, ScrollViewBase} from 'react-native';
 import {WebView} from 'react-native-webview';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
+import { InterstitialAdManager,BannerView, AdSettings } from 'react-native-fbads';
+import * as FacebookAds from 'expo-ads-facebook';
+
+
 //import { RefreshableListView } from 'react-native-refreshable-listview';
 
 export default class App extends Component {
@@ -11,9 +15,15 @@ export default class App extends Component {
       refreshing: false,
       loading: true,
       error: null,
+      isloaded:false
     };
     
   }
+
+  
+ 
+
+
   onRefresh = () => {
     this.setState({ refreshing: true });
     // You can perform any additional logic here, like reloading the page.
@@ -21,6 +31,8 @@ export default class App extends Component {
     // this.webViewRef.reload(); // Make sure to use a ref to access the WebView component.
     setTimeout(() => this.setState({ refreshing: false }), 10000); // Simulate refreshing for 1 second.
   };
+
+ 
 
   /*const App = () => {
     const [refreshing, setRefreshing] = React.useState(false);*/
@@ -32,12 +44,30 @@ export default class App extends Component {
       }, 2000);
     }, []);
     
+    InterstitialAdManager = () =>{ InterstitialAdManager.showAd(1041068427219804_1041068463886467)
+    .then((didClick) => {})
+    .catch((error) => {});
+   
+ }
+
+ InterstitialAdManager= () => {InterstitialAdManager.preloadAd('1041068427219804_1041068463886467')
+ .then((didClick) => {})
+ .catch((error) => {});
+ InterstitialAdManager.showPreloadedAd('1041068427219804_1041068463886467');
+ }
+
+ componentDidMount() {
+  // Set the placement ID for your banner ad
+  AdSettings.setPlacementId('1041068427219804_1041068467219800');
+}
+// Will show it if already loaded, or wait for it to load and show it.
     
     */
 
+    
         
     /*
-      <Button onPress={this._activate} title=" Click to Activate awake" />
+      
         <Button onPress={this._deactivate} title="Click to Deactivate awake" />
     onRefresh = () => {
           this.setState({ refreshing: true });
@@ -83,6 +113,37 @@ export default class App extends Component {
     }
     return false;
   }
+  getPlacementId = (bannerId) => {
+   let placementId;
+   if(bannerId){
+    placementId = Platform.OS === "ios" ? "1041068427219804_1041134240546556" : "1041068427219804_1041068467219800"
+   }else{
+    placementId = Platform.OS === "ios" ? "1041068427219804_1041134410546539" : "1041068427219804_1041068463886467"
+   }
+   if (__DEV__){
+    return`IMG_16_9_APP_INSTALL#${placementId}`;
+   }
+   return placementId;
+  }
+
+  showInterstitial = () => {
+    FacebookAds.InterstitialAdManager.showAd(interstitialId)
+    .then(didClick => console.og(didClick))
+    .catch(error => console.log(error));
+  }
+
+  getBannerAd = () => {
+    if(isloaded){
+      return(
+        <FacebookAds.BannerAd placementId='large' 
+        onPress={() => console.log("click")}
+        onError={error => console.log(error.nativeEvent)}/>
+      );
+    }
+  }
+
+
+
   _activate = () => {
     activateKeepAwakeAsync();
     alert('Activated!');
@@ -110,21 +171,44 @@ export default class App extends Component {
 
   render() {
     const { uri } = this.props;
-    const { refreshing, loading } = this.state;
+    const { refreshing, loading,isloaded } = this.state;
+    const bannerId = getPlacementId(true);
+    const InterstitialId = getPlacementId(false);
+    FacebookAds.AdSettings.requestPermissionsAsync().then(permissions => {
+      let canTrack = permissions=== "granted";
+      FacebookAds.AdSettings.setAdvertiserTrackingEnabled(canTrack);
+      setIsloaded(true);
+
+    })
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justtifyContent: 'center',
+      },
+      content: {
+        flex: 1,
+        alignItems: 'center',
+        justtifyContent: 'center',
+      },
+      adView: {
+        alignItems: 'flex-start'
+      }
+    }
+      
+      )
+
     return (
       
       
 
       <View style={{flex:1} } >
-       <View
-         refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
-          />
-        }
-       />
-        
+       <view style={style.content}>
+       <Button title='Show Interstitial' onPress={showInterstitial}></Button>
+       </view>
+       <View style= {style.adView}>{this.getBannerAd}</View>
         
         <WebView
           ref={(webView) => { this.webView.ref = webView; }}
@@ -143,9 +227,12 @@ export default class App extends Component {
         
       
         {loading && <ActivityIndicator size="large" />} 
-       
+        <Button onPress={this._activate} title=" Click to Activate awake" />
+        <BannerView type="standard" />
         
     </View>
+
+   
     
     );
     

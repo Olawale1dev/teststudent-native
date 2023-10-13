@@ -6,6 +6,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+
     "privacy": "public",
     "sdkVersion": "49.0.0",
     "platforms": [
@@ -14,9 +15,9 @@
       "web"
     ],
     "orientation": "portrait",
-    "icon": "./splash1.png",
+    "icon": "./asset/splash1.png",
     "splash": {
-      "image": "./splash2.png",
+      "image": "./asset/splash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -31,7 +32,24 @@
       "package": "com.teststudent.1",
       "versionCode": 1
     },
-    "description": "PRACTICE BEFORE EXAM"
+    "description": "PRACTICE BEFORE EXAM",
+    "plugins": [
+      "react-native-fbsdk-next",
+      "react-native-fbads",
+      "expo-ads-facebook",
+      [
+        
+        {
+          "appID": "1041068427219804",
+          "displayName": "ateststudent-native",
+          "clientToken": "4ceaf674b4986f494a64a83caba30f18",
+          "advertiserIDCollectionEnabled": true,
+          "autoLogAppEventsEnabled": true,
+          "isAutoInitEnabled": true,
+          "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
+    ]
   },
   "name": "teststudent-native"
 }
