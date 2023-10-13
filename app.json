@@ -6,7 +6,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-
+    "appID": "1041068427219804",
+    "facebookScheme": "fb1041068427219804",
+    "facebookAppId": "1041068427219804",
+    "facebookDisplayName": "teststudent-native",
+    "facebookAutoLogAppEventsEnabled": false,
+    "facebookAdvertiserIDCollectionEnabled": false,
     "privacy": "public",
     "sdkVersion": "49.0.0",
     "platforms": [
@@ -37,16 +42,18 @@
       "react-native-fbsdk-next",
       "react-native-fbads",
       "expo-ads-facebook",
-      [
-        
+      ["react-native-fbsdk-next",
         {
+          "facebookScheme": "fb123243435566",
+          "facebookAppId": "1041068427219804",
+          "facebookDisplayName": "myapp",
           "appID": "1041068427219804",
-          "displayName": "ateststudent-native",
+          "displayName": "Teststudent-native",
           "clientToken": "4ceaf674b4986f494a64a83caba30f18",
           "advertiserIDCollectionEnabled": true,
           "autoLogAppEventsEnabled": true,
           "isAutoInitEnabled": true,
-          "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+          "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you." 
         }
       ]
     ]
