@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View,BackHandler,Platform, ActivityIndicator,Button,Text,Platform,ScrollView,RefreshControl, FlatList, ScrollViewBase} from 'react-native';
+import {View,BackHandler,Platform, ActivityIndicator,Button,Text,ScrollView,RefreshControl, FlatList, ScrollViewBase} from 'react-native';
 import {WebView} from 'react-native-webview';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { InterstitialAdManager,BannerView, AdSettings } from 'react-native-fbads';

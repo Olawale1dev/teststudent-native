@@ -9,5 +9,6 @@ initialize();
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately
-AppRegistry.registerComponent(appName, () => YourRootComponent);
+//AppRegistry.registerCompnent(appName, () => YourRootComponent);
+AppRegistry.registerCompnent(appName, () => App);
 //registerRootComponent(App);
